@@ -156,7 +156,7 @@ class _ViewerState extends State<Viewer> {
                                         latitude: widget.pinX!,
                                         longitude: widget.pinY!,
                                         width: 150.0,
-                                        height: 100.0,
+                                        height: 128.0,
                                         widget: Column(
                                           children: [
                                             Icon(
