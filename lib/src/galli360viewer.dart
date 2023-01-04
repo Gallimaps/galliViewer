@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
+import 'dart:math';
+
 
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
@@ -130,6 +132,8 @@ class _ViewerState extends State<Viewer> {
                             });
                           },
                           child: Panorama(
+                                       longitude:widget.pinY==null?0: (widget.pinY! / 10000) * pi,
+                          latitude: widget.pinX==null?0: (widget.pinX! / 10000) * pi,
                               maxZoom: widget.maxZoom ?? 5.0,
                               minZoom: widget.minZoom ?? 1.0,
                               onTap: (lng, lat, tilt) {
