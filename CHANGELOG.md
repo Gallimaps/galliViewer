@@ -9,3 +9,7 @@
 ## 0.0.3
 
 * Minor Fixes
+
+## 0.0.4
+
+* Documentation Update
