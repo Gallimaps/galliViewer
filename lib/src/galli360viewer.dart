@@ -1,8 +1,6 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'dart:io';
 import 'dart:math';
-
 
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +8,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:panorama/panorama.dart';
 import 'package:http/http.dart' as http;
 
+/// A widget that displays a panoramic image at the specified coordinates,
+/// with optional markers and interactive features.
 class Viewer extends StatefulWidget {
   const Viewer(
       {Key? key,
@@ -30,21 +30,55 @@ class Viewer extends StatefulWidget {
       this.showClose,
       required this.controller})
       : super(key: key);
+
+  /// The coordinates of the location to display in the panoramic image.
   final LatLng coordinate;
+
+  /// The X position of the marker, as a fraction of the width of the image.
   final double? pinX;
+
+  /// The Y position of the marker, as a fraction of the height of the image.
   final double? pinY;
+
+  /// The height of the panoramic image.
   final double? height;
+
+  /// The width of the panoramic image.
   final double? width;
+
+  /// The widget to display while the panoramic image is loading.
   final Widget? loadingWidget;
+
+  /// The widget to display as a close button.
   final Widget? closeWidget;
+
+  /// Whether to show the close button.
   final bool? showClose;
+
+  /// Whether to animate the panoramic image when it is loaded.
   final bool? animation;
+
+  /// The maximum zoom level allowed for the panoramic image.
   final double? maxZoom;
+
+  /// The minimum zoom level allowed for the panoramic image.
   final double? minZoom;
+
+  /// The speed of the animation when the panoramic image is loaded.
   final double? animSpeed;
+
+  /// The sensitivity of the pan and zoom controls.
   final double? sensitivity;
+
+  /// The icon to use for the marker.
   final IconData? pinIcon;
+
+  /// A callback function that is called when the marker is placed.
+  ///
+  /// The `x` and `y` parameters represent the marker's position as fractions of the width and height of the image, respectively.
   final Function(double x, double y)? onSaved;
+
+  /// The controller for the panoramic image.
   final Galli360 controller;
 
   @override
@@ -59,8 +93,7 @@ class _ViewerState extends State<Viewer> {
   double? markerX;
   double? markerY;
 
-  initialise() {}
-
+  /// Retrieves the panoramic image from the server.
   get360Image() async {
     final response = await http.get(
       Uri.parse(
@@ -70,13 +103,11 @@ class _ViewerState extends State<Viewer> {
         'Content-Type': 'application/json; charset=UTF-8',
       },
     );
-    log(response.statusCode.toString());
     if (response.statusCode == 200) {
       setState(() {
         imageLink = jsonDecode(response.body)["data"]["imgurl"];
       });
     } else {
-      Navigator.pop(context);
       setState(() {
         error = true;
       });
@@ -132,8 +163,12 @@ class _ViewerState extends State<Viewer> {
                             });
                           },
                           child: Panorama(
-                                       longitude:widget.pinY==null?0: (widget.pinY! / 10000) * pi,
-                          latitude: widget.pinX==null?0: (widget.pinX! / 10000) * pi,
+                              longitude: widget.pinY == null
+                                  ? 0
+                                  : (widget.pinY! / 10000) * pi,
+                              latitude: widget.pinX == null
+                                  ? 0
+                                  : (widget.pinX! / 10000) * pi,
                               maxZoom: widget.maxZoom ?? 5.0,
                               minZoom: widget.minZoom ?? 1.0,
                               onTap: (lng, lat, tilt) {
@@ -176,7 +211,8 @@ class _ViewerState extends State<Viewer> {
                                         ),
                                       )
                                     : Hotspot(),
-                                markerX != null && markerY != null
+                                widget.onSaved == null ||
+                                        (markerX != null && markerY != null)
                                     ? Hotspot(
                                         latitude: markerX!,
                                         longitude: markerY!,
@@ -272,12 +308,17 @@ class _ViewerState extends State<Viewer> {
   }
 }
 
+/// Represents a geographic coordinate.
 class LatLng {
+  /// The latitude of the coordinate.
   final double latitude;
+
+  /// The longitude of the coordinate.
   final double longitude;
   LatLng({required this.latitude, required this.longitude});
 }
 
+/// A controller that manages the panoramic image viewer.
 class Galli360 {
   final String authkey;
   Galli360(this.authkey) {
@@ -303,16 +344,13 @@ class Galli360 {
   }
 
   _getDeviceKey() async {
-    log("getting device key");
     String? key;
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
     if (Platform.isIOS) {
       var iosDeviceInfo = await deviceInfo.iosInfo;
-      log("ios keu is: ${iosDeviceInfo.identifierForVendor}");
       key = iosDeviceInfo.identifierForVendor; // unique ID on iOS
     } else if (Platform.isAndroid) {
       var androidDeviceInfo = await deviceInfo.androidInfo;
-      log("android key is: ${androidDeviceInfo.id}");
       key = androidDeviceInfo.id; // unique ID on Android
     }
     if (key != null) {

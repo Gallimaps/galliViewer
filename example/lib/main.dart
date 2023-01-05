@@ -45,6 +45,9 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Viewer(
           controller: galli,
+          onSaved: ((x, y) => {print("$x,$y")}),
+          pinX: 10.189151195944662,
+          pinY: 66.2590812683003,
           coordinate:
               LatLng(latitude: 27.68443083270, longitude: 85.30315578664)),
     );

@@ -1,2 +1,71 @@
-Galli360 viewer is a flutter widget that allows users to view and interact with 360 street images of GalliMaps. These images create a wide, immersive view of a scene with which users  can pan, tilt, and zoom in on different parts of the images of different streets of Nepal. It gives users the feeling of being present in the scene. In addition, users will also be able to pin and save a location (house/store/land) on the 360 image, and further share it with other users.
-In the context of the Flutter framework, Galli360 viewer package would provide a set of pre-built widgets and functions that developers could use to easily incorporate Galli360 street-view image’s viewing capabilities into their Flutter apps. This would allow developers to quickly and easily add immersive, interactive panoramic views to their apps, enhancing the user experience and helping to engage and retain users. Developers will also be able to create a channel to allow users to share their houses/location with them as well as share the pin data with other users using their platform.
+[GalliMaps](https://github.com/Gallimaps/galliViewer/tree/main/assets/galliIcon.svg) 
+# Galli360 Viewer
+[![pub package](https://img.shields.io/pub/v/galli360viewer.svg)](https://pub.dartlang.org/packages/galli360viewer)
+
+(./README_CH.md)
+
+Galli Maps' flutter library to show 360 images of streets of Nepal
+1. wide, imersive view
+2. pan, tilt and zoom in different parts of images
+3. single tap to pin a building/location
+4. save the pinned location and share it with others
+
+
+## Setup
+
+Add galli360viewer as a dependency in your pubspec.yaml file
+```yaml
+dependencies:
+    galli360viewer: ${last_version}
+```
+
+## How to use
+
+Import and add the Galli360Viewer widget to your project
+```dart
+import 'package:galli360viewer/galli360viewer.dart';
+... ...
+
+final Galli360 controller = Galli360(token);
+
+@override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: Viewer(
+        coordinate: LatLng(37.421997, -122.084057),
+        pinX: 0.5,
+        pinY: 0.5,
+        height: 400,
+        width: 400,
+        loadingWidget: Container(
+          child: Center(
+            child: const CircularProgressIndicator(),
+          ),
+        ),
+        closeWidget: Container(
+          child: Center(
+            child: Text('Close'),
+          ),
+        ),
+        showClose: true,
+        animation: true,
+        maxZoom: 2,
+        minZoom: 0.5,
+        animSpeed: 5,
+        sensitivity: 5,
+        pinIcon: Icons.location_on,
+        onSaved: (double x, double y) {
+          print(x);
+          print(y);
+        },
+        controller: controller,
+      ),
+    );
+  }
+ ```
+
+## Preview
+[gif for galli360viewer](https://github.com/Gallimaps/galliViewer/tree/main/assets/demo.gif)
