@@ -13,3 +13,11 @@
 ## 0.0.4
 
 * Documentation Update
+
+## 0.0.5
+
+* Documentation Update
+
+## 0.0.6
+
+* Minor Fixes
