@@ -1,4 +1,3 @@
-![GalliMaps](https://github.com/Gallimaps/galliViewer/tree/main/assets/galliIcon.svg) 
 # Galli360 Viewer
 [![pub package](https://img.shields.io/pub/v/galli360viewer.svg)](https://pub.dartlang.org/packages/galli360viewer)
 
@@ -67,4 +66,4 @@ final Galli360 controller = Galli360(token);
  ```
 
 ## Preview
-![gif for galli360viewer](https://github.com/Gallimaps/galliViewer/tree/main/assets/demo.gif)
+![Preview](https://github.com/Gallimaps/galliViewer/blob/main/assets/demo.gif)
