@@ -1,8 +1,7 @@
-[GalliMaps](https://github.com/Gallimaps/galliViewer/tree/main/assets/galliIcon.svg) 
+![GalliMaps](https://github.com/Gallimaps/galliViewer/tree/main/assets/galliIcon.svg) 
 # Galli360 Viewer
 [![pub package](https://img.shields.io/pub/v/galli360viewer.svg)](https://pub.dartlang.org/packages/galli360viewer)
 
-(./README_CH.md)
 
 Galli Maps' flutter library to show 360 images of streets of Nepal
 1. wide, imersive view
@@ -68,4 +67,4 @@ final Galli360 controller = Galli360(token);
  ```
 
 ## Preview
-[gif for galli360viewer](https://github.com/Gallimaps/galliViewer/tree/main/assets/demo.gif)
+![gif for galli360viewer](https://github.com/Gallimaps/galliViewer/tree/main/assets/demo.gif)
