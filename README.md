@@ -1,4 +1,5 @@
-# Galli360 Viewer [![Galli Maps](https://github.com/Gallimaps/galliViewer/blob/main/assets/galliIcon.svg)](https://gallimaps.com/)
+[![Galli Maps](https://github.com/Gallimaps/galliViewer/blob/main/assets/galliIcon.svg)](https://gallimaps.com/)
+# Galli360 Viewer
 [![pub package](https://img.shields.io/pub/v/galli360viewer.svg)](https://pub.dartlang.org/packages/galli360viewer)
 
 
