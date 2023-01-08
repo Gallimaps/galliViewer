@@ -48,8 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
           onSaved: ((x, y) => {print("$x,$y")}),
           pinX: 10.189151195944662,
           pinY: 66.2590812683003,
-          coordinate:
-              LatLng(latitude: 27.68443083270, longitude: 85.30315578664)),
+          coordinate: LatLng(latitude: 27.655572, longitude: 85.249278)),
     );
   }
 }

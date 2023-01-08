@@ -103,6 +103,7 @@ class _ViewerState extends State<Viewer> {
         'Content-Type': 'application/json; charset=UTF-8',
       },
     );
+    print(response.statusCode);
     if (response.statusCode == 200) {
       setState(() {
         imageLink = jsonDecode(response.body)["data"]["imgurl"];
@@ -124,17 +125,27 @@ class _ViewerState extends State<Viewer> {
   Widget build(BuildContext context) {
     if (widget.controller._initialised) {
       return imageLink == null
-          ? WillPopScope(
-              onWillPop: () async {
-                return false;
-              },
-              child: Center(
-                child: widget.loadingWidget ??
-                    const CircularProgressIndicator(
-                      color: Colors.blue,
+          ? error
+              ? const Center(
+                  child: Card(
+                    child: SizedBox(
+                      width: 300,
+                      height: 300,
+                      child: Center(child: Text("NO IMAGE FOR THE LOCATION")),
                     ),
-              ),
-            )
+                  ),
+                )
+              : WillPopScope(
+                  onWillPop: () async {
+                    return false;
+                  },
+                  child: Center(
+                    child: widget.loadingWidget ??
+                        const CircularProgressIndicator(
+                          color: Colors.blue,
+                        ),
+                  ),
+                )
           : WillPopScope(
               onWillPop: () async {
                 if (markerX == null && markerY == null) {
@@ -172,13 +183,10 @@ class _ViewerState extends State<Viewer> {
                               maxZoom: widget.maxZoom ?? 5.0,
                               minZoom: widget.minZoom ?? 1.0,
                               onTap: (lng, lat, tilt) {
-                                if (widget.pinX == null &&
-                                    widget.pinY == null) {
-                                  setState(() {
-                                    markerX = lat;
-                                    markerY = lng;
-                                  });
-                                }
+                                setState(() {
+                                  markerX = lat;
+                                  markerY = lng;
+                                });
                               },
                               hotspots: [
                                 Hotspot(
