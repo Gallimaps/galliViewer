@@ -21,3 +21,7 @@
 ## 0.0.6
 
 * Minor Fixes
+
+## 0.0.7
+
+* Fixed Bug for when image is not available at a coordinate
