@@ -1,8 +1,9 @@
 import 'dart:convert';
-import 'dart:io';
 import 'dart:math';
+import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:panorama/panorama.dart';
@@ -103,7 +104,6 @@ class _ViewerState extends State<Viewer> {
         'Content-Type': 'application/json; charset=UTF-8',
       },
     );
-    print(response.statusCode);
     if (response.statusCode == 200) {
       setState(() {
         imageLink = jsonDecode(response.body)["data"]["imgurl"];
@@ -118,6 +118,11 @@ class _ViewerState extends State<Viewer> {
   @override
   void initState() {
     get360Image();
+    if (widget.animation != null && !widget.animation!) {
+      speed = 0.0;
+    } else if (widget.animSpeed != null) {
+      speed = widget.animSpeed ?? 2;
+    }
     super.initState();
   }
 
@@ -242,10 +247,7 @@ class _ViewerState extends State<Viewer> {
                                       )
                                     : Hotspot()
                               ],
-                              animSpeed: (widget.animation != null &&
-                                      !widget.animation!)
-                                  ? 0
-                                  : widget.animSpeed ?? speed,
+                              animSpeed: speed,
                               sensitivity: widget.sensitivity ?? 2,
                               child: Image.network(imageLink!)),
                         ),
@@ -354,16 +356,21 @@ class Galli360 {
   _getDeviceKey() async {
     String? key;
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-    if (Platform.isIOS) {
+    if (kIsWeb) {
+      key = "web";
+    } else if (Platform.isIOS) {
       var iosDeviceInfo = await deviceInfo.iosInfo;
       key = iosDeviceInfo.identifierForVendor; // unique ID on iOS
     } else if (Platform.isAndroid) {
       var androidDeviceInfo = await deviceInfo.androidInfo;
       key = androidDeviceInfo.id; // unique ID on Android
+    } else {
+      key = "xyz";
     }
     if (key != null) {
       verify(authkey, key);
     }
+    verify(authkey, "aca");
   }
 
   bool _initialised = false;

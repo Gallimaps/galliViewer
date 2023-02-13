@@ -7,7 +7,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({key});
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+  const MyHomePage({key, required this.title});
   final String title;
 
   @override
@@ -48,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
           onSaved: ((x, y) => {print("$x,$y")}),
           pinX: 10.189151195944662,
           pinY: 66.2590812683003,
-          coordinate: LatLng(latitude: 27.655572, longitude: 85.249278)),
+          coordinate: LatLng(latitude: 27.683370, longitude: 85.304596)),
     );
   }
 }

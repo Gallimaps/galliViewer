@@ -25,3 +25,11 @@
 ## 0.0.7
 
 * Fixed Bug for when image is not available at a coordinate
+
+## 0.0.8
+
+* Making fixes for flutter version 2.12
+
+## 0.0.10
+
+* Fixes of animations with 2.12
