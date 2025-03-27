@@ -1,6 +1,6 @@
 name: galli360viewer
 description: Galli360 is a Flutter package that lets users view and interact with 360 street images from GalliMaps. Users can pan, tilt, and zoom in on images and pin and share locations.
-version: 0.0.5
+version: 0.0.12
 homepage: https://github.com/Gallimaps/galliViewer
 
 environment:
@@ -13,7 +13,7 @@ dependencies:
   panorama: ^0.4.1
   http: ^0.13.0
   flutter_svg: ^0.23.0
-  device_info_plus: ^8.0.0
+  device_info_plus: ^2.0.0
 
 
 

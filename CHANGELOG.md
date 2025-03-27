@@ -30,6 +30,19 @@
 
 * Making fixes for flutter version 2.12
 
+## 0.0.9
+
+* For Http version ^0.13.0 and svg ^0.23.0
+
+
 ## 0.0.10
 
 * Fixes of animations with 2.12
+
+## 0.0.11
+
+* Fixes for device_plus_info not working in older version of flutter
+
+## 0.0.12
+
+* Upgrade to https

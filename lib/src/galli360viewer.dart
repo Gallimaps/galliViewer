@@ -6,6 +6,7 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:galli360viewer/env.dart';
 import 'package:panorama/panorama.dart';
 import 'package:http/http.dart' as http;
 
@@ -97,8 +98,8 @@ class _ViewerState extends State<Viewer> {
   /// Retrieves the panoramic image from the server.
   get360Image() async {
     final response = await http.get(
-      Uri.parse(
-          "https://gallimaps.com/getstreetview/${widget.coordinate.latitude},${widget.coordinate.longitude}"),
+      Uri.parse(galliViewerUrl.getImage(
+          widget.coordinate.latitude, widget.coordinate.longitude)),
       headers: <String, String>{
         'Accept': 'application/json',
         'Content-Type': 'application/json; charset=UTF-8',
@@ -201,7 +202,7 @@ class _ViewerState extends State<Viewer> {
                                   height: 200.0,
                                   // widget: Image.asset('images_v2/app_icon_v2.png'),
                                   widget: SvgPicture.network(
-                                      "http://uat.gotaxinepal.com/storage/galliIcon.svg"),
+                                      "https://gallimaps.com/galliIcon.svg"),
                                 ),
                                 widget.pinX != null && widget.pinY != null
                                     ? Hotspot(
@@ -335,8 +336,7 @@ class Galli360 {
     _getDeviceKey();
   }
   verify(token, key) async {
-    final response = await http.post(
-        Uri.parse("http://map.gallimap.com/authTest/api/verify"),
+    final response = await http.post(Uri.parse(galliViewerUrl.verify),
         headers: <String, String>{
           'Accept': 'application/json',
           'Content-Type': 'application/json; charset=UTF-8',
